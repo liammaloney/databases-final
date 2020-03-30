@@ -17,3 +17,13 @@ db.query = select ATTRIBUTE from SCHEMANAME.TABLENAME
 ```
 
 This works with any query type but functionality is currently limited to running the query specified in the properties file.
+
+
+## Functionality to Add
+
+- [ ] Registration of Owners (Creating a PlatformUser entry)
+- [ ] Registration of Renters (Creating a PlatformUser entry)
+- [ ] Act of renting one or more properties by a renter (Creating a Rental Agreement entry)
+- [ ] Act of putting a property up for rent (Creating a Property entry)
+- [ ] Act of making a payment from a renter to an owner
+- [ ] Act of reviewing a property
