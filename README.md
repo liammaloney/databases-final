@@ -5,7 +5,7 @@
 - Liam Maloney 8129429
 - Zhen Wang 300057304
 
-##Setup
+## Setup
 
 This project requires that the user write an `application.properties` file and leave it in the top level directory in this project. The following is the format for the file:
 ```
