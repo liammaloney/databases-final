@@ -2,7 +2,6 @@ package code;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Scanner;
@@ -229,7 +228,7 @@ public class UserUI {
     }
 
     private static int getPropertyID(int userid,String branchid,int addnum,String addstreet, String addpostal,
-    String addcity, String countryid,int rooms,int bathrooms, Date created,String status) throws SQLException, ClassNotFoundException {
+                                     String addcity, String countryid,int rooms,int bathrooms, Date created,String status) throws SQLException, ClassNotFoundException {
         Connection db = loadDriver();
         Statement st = db.createStatement();
         ResultSet rs = st.executeQuery("SELECT propertyid FROM test_vraja.property WHERE userid="+"'"+userid+"' AND branchid='"+branchid+"' AND addressnum='"+addnum+"' AND addressstreet='"+addstreet+"' AND addresscity='"+addcity+"' AND addresspostal='"+addpostal+"'" +
@@ -299,8 +298,8 @@ public class UserUI {
 
     //Function to add new property to database
     private static boolean createPropertySQL(int userid, String branchid, int addressnum, String addressstreet,
-                                         String addresscity, String addresspostal, String countryid, String description,
-                                         int rooms, int bathrooms, int minimumstay, String refundtype, Date created, String status) throws SQLException, ClassNotFoundException {
+                                             String addresscity, String addresspostal, String countryid, String description,
+                                             int rooms, int bathrooms, int minimumstay, String refundtype, Date created, String status) throws SQLException, ClassNotFoundException {
         Connection db = loadDriver();
         Statement st = db.createStatement();
         int rs = st.executeUpdate("INSERT INTO test_vraja.Property VALUES("+"DEFAULT"+","+"'"+userid+"'"+","+"'"+branchid+"'"+","+"'"+addressnum+"'"+","+"'"+addressstreet+"'"+","+"'"+
@@ -316,7 +315,7 @@ public class UserUI {
     }
 
     private static boolean createUserSQL(String pass, String fname,String lname,String dob, int addressnum, String addressstreet,
-                                             String addresscity, String addresspostal, String countryid, String email, String phone,String about, String usertype, Date created, String status) throws SQLException, ClassNotFoundException {
+                                         String addresscity, String addresspostal, String countryid, String email, String phone,String about, String usertype, Date created, String status) throws SQLException, ClassNotFoundException {
         Connection db = loadDriver();
         Statement st = db.createStatement();
         int rs = st.executeUpdate("INSERT INTO test_vraja.Platformuser VALUES("+"DEFAULT,"+"'"+pass+"'"+","+"'"+fname+"'"+","+"'"+lname+"'"+","+"'"+dob+"'"+","+"'"+addressnum+"'"+","+"'"+addressstreet+"'"+","+"'"+
@@ -383,6 +382,7 @@ public class UserUI {
                 result= true;
             }
         }
+        rs.close();st.close();db.close();
         return result;
     }
 
@@ -603,7 +603,7 @@ public class UserUI {
     }
 
     private static int makePayment(int propertyid,int payerid,int receiveeid,Date sdate,Date edate) throws SQLException, ClassNotFoundException {
-      Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         String paytype= null;
         boolean a = true;
         while(a) {
@@ -1279,7 +1279,7 @@ public class UserUI {
             refundtype = in.nextLine();
 
             branchid = getBranchFromCountry(countryid);
-            
+
             //Inserts property into DB and returns boolean if successful
             Boolean inserted = (createPropertySQL(userid,branchid,
                     addressnum,addressstreet,addresscity,addresspostal,countryid,
@@ -1302,7 +1302,7 @@ public class UserUI {
                 boolean amaddded = false;
                 if (!alreadyAdded(amm,propid)){
                     amaddded = createPropertyAmenitySQL(amm,propid,getCurrentDate(),"Active");
-                    }
+                }
                 if (amaddded){System.out.println("Amenity Successfully Added.");}
                 else{
                     System.out.println("Amenity was not added. Either already added or not available.");
@@ -1543,5 +1543,5 @@ public class UserUI {
                 runRENTERUI(user);
             }
         }
-}
+    }
 }
